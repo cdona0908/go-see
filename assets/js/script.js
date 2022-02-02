@@ -1,24 +1,18 @@
 
 var getMovieInfo = function () {
 
-    var apiUrl = "http://www.omdbapi.com/?i=tt3896198&apikey=b1ac471e"
+    // var apiUrl = "http://www.omdbapi.com/?t=movie&y=2021&apikey=b1ac471e"
+
+    // ?i=tt3896198&
     
+    var apiUrl = "https://www.googleapis.com/youtube/v3/videos/?apikey=AIzaSyBC25-sXfyC7zAewvLulX5KxCLKO_nvJX8"
 
-    // apikey for youtube : "http://www.youtube.googleapis.com/AIzaSyBC25-sXfyC7zAewvLulX5KxCLKO_nvJX8"
+
+    // API key Ash got when going to enable API key
+    // AIzaSyAI0RHGWb89XVlFFWks7NfYy0J0uQRu-HY
     
-
-
-    // fetch format that my tutor suggested
-
-    // fetch(apiUrl)
-    //     .then(function (res) { res.json() })
-    //     .then(function (responseData) {
-    //         console.log(responseData)
-    //         .catch(err => { console.log(err) })
-
-    // });
-
-    // fetch format that I got from the module
+   
+    // working fetch
 
             fetch(apiUrl) 
                 .then(function (response) {
@@ -30,9 +24,40 @@ var getMovieInfo = function () {
                         console.log(data);           
                 });
 
-                
+   
+    };
 
-    // original fetch request tried at the beginning with response but no data
+    getMovieInfo();
+
+    
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+     // fetch format that my tutor suggested
+
+    // fetch(apiUrl)
+    //     .then(function (res) { res.json() })
+    //     .then(function (responseData) {
+    //         console.log(responseData)
+    //         .catch(err => { console.log(err) })
+
+    // });
+
+
+     // original fetch request tried at the beginning with response but no data
 
             // fetch(apiUrl)
             // .then (function (response) {
@@ -45,10 +70,4 @@ var getMovieInfo = function () {
             //         });
             //     }
             // })
-    };
-
-    getMovieInfo();
-
-    
-
 
