@@ -1,3 +1,18 @@
+var inputMovieEl = document.querySelector("#input-movie");
+
+
+var formSubmitHandler = function (event) {
+    var movieTitle = inputMovieEl.value();
+
+    if (movieTitle) {
+        getMovieInfo(movieTitle);
+        inputMovieEl.value = "";
+    } else {
+        alert("Please enter a valid movie title");
+    }
+    console.log(event)
+}
+
 
 var getMovieInfo = function () {
 
@@ -23,7 +38,6 @@ var getMovieInfo = function () {
                         console.log("data"); 
                         console.log(data);           
                 });
-
    
     };
 
