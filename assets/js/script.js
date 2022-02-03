@@ -14,39 +14,55 @@ var formSubmitHandler = function (event) {
 }
 
 
+
+
+//  Congregating our urls to use later.
+const APIKEY = '&key=AIzaSyBC25-sXfyC7zAewvLulX5KxCLKO_nvJX8'
+const QUERYURL = 'https://youtube.googleapis.com/youtube/v3/'
+const WATCHURL = 'https://www.youtube.com/watch?v='
+
+
 var getMovieInfo = function () {
 
     // var apiUrl = "http://www.omdbapi.com/?t=movie&y=2021&apikey=b1ac471e"
 
-    // ?i=tt3896198&
-    
-    var apiUrl = "https://www.googleapis.com/youtube/v3/videos/?apikey=AIzaSyBC25-sXfyC7zAewvLulX5KxCLKO_nvJX8"
+    // Gathering our user input and assigning it a name 
+    var userInput = 'MillionDOllarBabyMovie'
 
+    // Combining our QUERYURL,UserInput, and APIKEY. We also use Youtube's field parameters to refine wthe response we get. 
+    var titleSearch = `${QUERYURL}search?part=snippet&maxResults=10&q=${userInput}Trailer${APIKEY}`
 
-    // API key Ash got when going to enable API key
-    // AIzaSyAI0RHGWb89XVlFFWks7NfYy0J0uQRu-HY
-    
-   
     // working fetch
+    fetch(titleSearch)
+        .then(function (response) {
+            console.log("response");
+            return response.json();
+        })
+        .then(function (data) {
+            console.log();
+            // We Console log our response data before taking out waht we need. 
+            console.log("Data:",data);
 
-            fetch(apiUrl) 
-                .then(function (response) {
-                    console.log("response");
-                    return response.json();
-                })
-                .then(function (data) {
-                        console.log("data"); 
-                        console.log(data);           
-                });
-   
-    };
+            // take itemes arr from data
+            var itemsArr = data.items;
+        
 
-    getMovieInfo();
+            // itemsarr.forEach((item)=>{ YOUR CODE HERE })
 
-    
+            for (let i = 0; i < itemsArr.length; i++) {
+                const trailerId = itemsArr[i].id.videoId;
+                const Trailerlink = `${WATCHURL}${trailerId}`; 
+            }
+        });
+
+};
+
+getMovieInfo();
 
 
-    
+
+
+
 
 
 
