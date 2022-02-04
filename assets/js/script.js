@@ -1,5 +1,6 @@
 var inputMovieEl = document.querySelector("#input-movie");
 
+// WHEN the user searches a movie title, THEN a list is created of movies with the same title 
 
 var formSubmitHandler = function (event) {
     var movieTitle = inputMovieEl.value();
@@ -12,6 +13,17 @@ var formSubmitHandler = function (event) {
     }
     console.log(event)
 }
+
+
+// WHEN the user wants to search for a movie THEN they can input a year and genre to get a list selection
+
+
+
+
+
+//  WHEN the user gets a list, THEN the year of release, awards, ratings, run time is given
+
+
 
 
 
@@ -58,6 +70,21 @@ var getMovieInfo = function () {
 };
 
 getMovieInfo();
+
+
+// When I want to save the movie for later, a list is created via localStorage with title and a link to the trailer
+
+
+
+
+
+
+
+
+
+
+// Set up remove functions from local Storage
+
 
 
 
