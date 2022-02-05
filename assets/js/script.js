@@ -71,6 +71,11 @@ var getMovieTrailer = function () {
 
 getMovieTrailer();
 
+var displayMovieTrailer = function () {
+
+    
+}
+
 
 // When I want to save the movie for later, a list is created via localStorage with title and a link to the trailer
 
