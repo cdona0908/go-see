@@ -75,9 +75,10 @@ var displayMovieInfo = function(info, titleEl){
 
 
 //  Congregating our urls to use later.
-const APIKEY = '&key=AIzaSyBC25-sXfyC7zAewvLulX5KxCLKO_nvJX8'
+const APIKEY = '&key=AIzaSyAI0RHGWb89XVlFFWks7NfYy0J0uQRu-HY'
 const QUERYURL = 'https://youtube.googleapis.com/youtube/v3/'
 const WATCHURL = 'https://www.youtube.com/watch?v='
+
 
 
 var getMovieTrailer = function () {
