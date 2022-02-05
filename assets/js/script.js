@@ -23,7 +23,7 @@ var formSubmitHandler = function (event) {
   } else {
       alert("Please enter a valid movie title");
   }
-  console.log(event)
+  
 };
 
 //Get Movie Information 
@@ -37,7 +37,8 @@ var getMovieInfo = function(title){
       if (response.ok) {
          console.log(response);
          response.json().then(function(data) {
-          console.log(data);          
+          console.log(data);
+          //displayMovieInfo(data, title);          
          });
         } else {
         alert("Error: " + response.statusText);
@@ -48,8 +49,17 @@ var getMovieInfo = function(title){
     });
 };
 
-//Display Movie Information
-getMovieInfo();
+//Display Movie Information Function
+
+var displayMovieInfo = function(info, titleEl){
+  // check if api returned any movies
+  if (info.length === 0){
+    alert("No movies found with that title");
+    return;
+  }
+
+};
+
 
 // WHEN the user wants to search for a movie THEN they can input a year and genre to get a list selection
 
