@@ -6,7 +6,7 @@ var formSubmitHandler = function (event) {
     var movieTitle = inputMovieEl.value();
 
     if (movieTitle) {
-        getMovieInfo(movieTitle);
+        getMovieTrailer(movieTitle);
         inputMovieEl.value = "";
     } else {
         alert("Please enter a valid movie title");
@@ -29,19 +29,19 @@ var formSubmitHandler = function (event) {
 
 
 //  Congregating our urls to use later.
-const APIKEY = '&key=AIzaSyBC25-sXfyC7zAewvLulX5KxCLKO_nvJX8'
+const APIKEY = '&key=AIzaSyAI0RHGWb89XVlFFWks7NfYy0J0uQRu-HY'
 const QUERYURL = 'https://youtube.googleapis.com/youtube/v3/'
 const WATCHURL = 'https://www.youtube.com/watch?v='
 
 
-var getMovieInfo = function () {
+var getMovieTrailer = function () {
 
     // var apiUrl = "http://www.omdbapi.com/?t=movie&y=2021&apikey=b1ac471e"
 
     // Gathering our user input and assigning it a name 
-    var userInput = 'MillionDOllarBabyMovie'
+    var userInput = 'IronMan'
 
-    // Combining our QUERYURL,UserInput, and APIKEY. We also use Youtube's field parameters to refine wthe response we get. 
+    // Combining our QUERYURL,UserInput, and APIKEY. We also use Youtube's field parameters to refine with the response we get. 
     var titleSearch = `${QUERYURL}search?part=snippet&maxResults=10&q=${userInput}Trailer${APIKEY}`
 
     // working fetch
@@ -58,7 +58,6 @@ var getMovieInfo = function () {
             // take itemes arr from data
             var itemsArr = data.items;
         
-
             // itemsarr.forEach((item)=>{ YOUR CODE HERE })
 
             for (let i = 0; i < itemsArr.length; i++) {
@@ -69,7 +68,8 @@ var getMovieInfo = function () {
 
 };
 
-getMovieInfo();
+
+getMovieTrailer();
 
 
 // When I want to save the movie for later, a list is created via localStorage with title and a link to the trailer
