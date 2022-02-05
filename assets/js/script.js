@@ -1,5 +1,37 @@
-var apiUrl = "http://www.omdbapi.com/?y=2020&apikey=b1ac471e" ;
-fetch(apiUrl)
+//----Selectors----//
+var movieFormEl = document.querySelector("#movie-form");
+var inputMovieEl = document.querySelector("#input-title");
+var descriptionContainer = document.querySelector("description-container");
+
+//---- Global Variables----//
+
+
+
+//----Functions----//
+
+// Search Movie by Title 
+var formSubmitHandler = function (event) {
+  // prevent page from refreshing
+  event.preventDefault();
+  // get value from input element
+  var movieTitle = inputMovieEl.value.trim();
+
+  if (movieTitle) {
+      getMovieInfo(movieTitle);
+      // clear old content
+      inputMovieEl.value = "";
+  } else {
+      alert("Please enter a valid movie title");
+  }
+  console.log(event)
+};
+
+//Get Movie Information 
+var getMovieInfo = function(title){
+  // format the OMDB api url
+  var apiOmdbUrl = "http://www.omdbapi.com/?apikey=b1ac471e&t=" + title +"&plot=full";
+  //make OMDB api request
+  fetch(apiOmdbUrl)
     .then(function(response) {
       // request was successful
       if (response.ok) {
@@ -14,23 +46,10 @@ fetch(apiUrl)
     .catch(function(error) {
       alert("Unable to connect to OMDB");
     });
+};
 
-var inputMovieEl = document.querySelector("#input-title");
-
-// WHEN the user searches a movie title, THEN a list is created of movies with the same title 
-
-var formSubmitHandler = function (event) {
-    var movieTitle = inputMovieEl.value();
-
-    if (movieTitle) {
-        getMovieInfo(movieTitle);
-        inputMovieEl.value = "";
-    } else {
-        alert("Please enter a valid movie title");
-    }
-    console.log(event)
-}
-
+//Display Movie Information
+getMovieInfo();
 
 // WHEN the user wants to search for a movie THEN they can input a year and genre to get a list selection
 
@@ -51,7 +70,7 @@ const QUERYURL = 'https://youtube.googleapis.com/youtube/v3/'
 const WATCHURL = 'https://www.youtube.com/watch?v='
 
 
-var getMovieInfo = function () {
+var getMovieTrailer = function () {
 
     // var apiUrl = "http://www.omdbapi.com/?t=movie&y=2021&apikey=b1ac471e"
 
@@ -86,7 +105,7 @@ var getMovieInfo = function () {
 
 };
 
-getMovieInfo();
+//getMovieTrailer();
 
 
 // When I want to save the movie for later, a list is created via localStorage with title and a link to the trailer
@@ -104,6 +123,8 @@ getMovieInfo();
 
 
 
+//Event Listeners
+movieFormEl.addEventListener("submit",formSubmitHandler);
 
 
 
