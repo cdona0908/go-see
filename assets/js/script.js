@@ -1,7 +1,7 @@
 //----Selectors----//
 var movieFormEl = document.querySelector("#movie-form");
 var inputMovieEl = document.querySelector("#input-title");
-var descriptionContainer = document.querySelector("description-container");
+var descriptionContainer = document.querySelector("#description-container");
 
 //---- Global Variables----//
 
@@ -20,6 +20,7 @@ var formSubmitHandler = function (event) {
       getMovieInfo(movieTitle);
       // clear old content
       inputMovieEl.value = "";
+      descriptionContainer.textContent = "";
   } else {
       alert("Please enter a valid movie title");
   }
@@ -38,7 +39,7 @@ var getMovieInfo = function(title){
          console.log(response);
          response.json().then(function(data) {
           console.log(data);
-          //displayMovieInfo(data, title);          
+          displayMovieInfo(data);          
          });
         } else {
         alert("Error: " + response.statusText);
@@ -51,12 +52,107 @@ var getMovieInfo = function(title){
 
 //Display Movie Information Function
 
-var displayMovieInfo = function(info, titleEl){
+var displayMovieInfo = function(info){
+  
   // check if api returned any movies
   if (info.length === 0){
     alert("No movies found with that title");
     return;
   }
+  //-----movie Title----
+
+  //create h2 element for movie title
+  var titleEl = document.createElement("h2");
+  titleEl.setAttribute("id","movie-title");
+  titleEl.textContent = info.Title;
+  // append to container
+  descriptionContainer.appendChild(titleEl);
+
+  //---------movie year, runtime and genre------
+
+  //create div element for movie year, runtime and genre container
+  var basicInfoEl = document.createElement("div");
+  //create span element for year
+  var yearEl = document.createElement("span");
+  yearEl.setAttribute("id","release-year");
+  yearEl.textContent = info.Year;
+  basicInfoEl.appendChild(yearEl);
+  
+  //create span element for runtime
+  var runTimeEl = document.createElement("span");
+  runTimeEl.setAttribute("id","runtime");
+  runTimeEl.textContent = info.Runtime;
+  basicInfoEl.appendChild(runTimeEl);
+  
+  //create span element for genre
+  var genreEl = document.createElement("span");
+  genreEl.setAttribute("id","genre");
+  genreEl.textContent = info.Genre;
+  basicInfoEl.appendChild(genreEl);
+  
+  //append basic info to container
+  descriptionContainer.appendChild(basicInfoEl);
+
+  //-----Movie Trailer-----Add containers and call trailer function here
+
+  //-------Ratings------
+  //create container for rates
+  var ratesEl = document.createElement("div");
+  ratesEl.setAttribute("id","rates-container");
+  ratesEl.setAttribute("class","rates-container");
+
+  //create container for IMDB rates
+  var imdbEl = document.createElement("div");
+  //create IMDB icon element 
+  var imdbIcon = document.createElement("i");  
+  imdbIcon.setAttribute("class","fab fa-imdb");
+  //create IMDB rate 
+  var imdbRate = info.Ratings[0].Value;
+  //append icon and rate to IMDB Element
+  imdbEl.append(imdbIcon, imdbRate);
+  //create container for Rotten Tomatoes rates
+  var rottenTomatoesEl = document.createElement("div");
+  //create Rotten Tomatoes icon element
+  var tomatoIcon = document.createElement("i"); 
+  // NEED TO FIND ICON FOR TOMATO, try also emoji !!!
+  //create Rotten Tomatoes rate
+  var tomatoRate = info.Ratings[1].Value;
+  //append icon and rate to Rotten Tomatoes Element
+  rottenTomatoesEl.append(tomatoIcon, tomatoRate);
+  
+  //Append Rates to rate container
+  ratesEl.append(imdbEl, rottenTomatoesEl);
+  //append Rates to description
+  descriptionContainer.appendChild(ratesEl);
+  
+  //-------Save Button------
+  var saveToWatchBtn = document.createElement("button");
+  saveToWatchBtn.setAttribute("class","btn");
+  saveToWatchBtn.setAttribute("id","save-movie");
+  saveToWatchBtn.setAttribute("type","submit");
+  
+  descriptionContainer.appendChild(saveToWatchBtn);  
+
+  //-------Plot------
+
+  //create movie Info container
+  var movieInfoContainer = document.createElement("div");
+  movieInfoContainer.setAttribute("class","movie-info");
+  //create movie Description Label
+  var movieDescriptionEl = document.createElement("h3");
+  movieDescriptionEl.textContent = 'Description';
+    
+  //create plot element
+  var moviePlot = document.createElement("p");
+  moviePlot.setAttribute("class","plot");
+  moviePlot.textContent = info.Plot;
+
+  movieInfoContainer.append(movieDescriptionEl, moviePlot);
+
+  //append movie Info to description container
+
+  descriptionContainer.appendChild(movieInfoContainer); 
+
 
 };
 
