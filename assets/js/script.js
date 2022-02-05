@@ -1,18 +1,64 @@
-var inputMovieEl = document.querySelector("#input-movie");
+//----Selectors----//
+var movieFormEl = document.querySelector("#movie-form");
+var inputMovieEl = document.querySelector("#input-title");
+var descriptionContainer = document.querySelector("description-container");
 
-// WHEN the user searches a movie title, THEN a list is created of movies with the same title 
+//---- Global Variables----//
 
+
+
+//----Functions----//
+
+// Search Movie by Title 
 var formSubmitHandler = function (event) {
-    var movieTitle = inputMovieEl.value();
+  // prevent page from refreshing
+  event.preventDefault();
+  // get value from input element
+  var movieTitle = inputMovieEl.value.trim();
 
-    if (movieTitle) {
-        getMovieTrailer(movieTitle);
-        inputMovieEl.value = "";
-    } else {
-        alert("Please enter a valid movie title");
-    }
-    console.log(event)
-}
+  if (movieTitle) {
+      getMovieInfo(movieTitle);
+      // clear old content
+      inputMovieEl.value = "";
+  } else {
+      alert("Please enter a valid movie title");
+  }
+  
+};
+
+//Get Movie Information 
+var getMovieInfo = function(title){
+  // format the OMDB api url
+  var apiOmdbUrl = "http://www.omdbapi.com/?apikey=b1ac471e&t=" + title +"&plot=full";
+  //make OMDB api request
+  fetch(apiOmdbUrl)
+    .then(function(response) {
+      // request was successful
+      if (response.ok) {
+         console.log(response);
+         response.json().then(function(data) {
+          console.log(data);
+          //displayMovieInfo(data, title);          
+         });
+        } else {
+        alert("Error: " + response.statusText);
+        }
+    })
+    .catch(function(error) {
+      alert("Unable to connect to OMDB");
+    });
+};
+
+//Display Movie Information Function
+
+var displayMovieInfo = function(info, titleEl){
+  // check if api returned any movies
+  if (info.length === 0){
+    alert("No movies found with that title");
+    return;
+  }
+
+};
 
 
 // WHEN the user wants to search for a movie THEN they can input a year and genre to get a list selection
@@ -39,9 +85,9 @@ var getMovieTrailer = function () {
     // var apiUrl = "http://www.omdbapi.com/?t=movie&y=2021&apikey=b1ac471e"
 
     // Gathering our user input and assigning it a name 
-    var userInput = 'IronMan'
+    var userInput = 'MillionDOllarBabyMovie'
 
-    // Combining our QUERYURL,UserInput, and APIKEY. We also use Youtube's field parameters to refine with the response we get. 
+    // Combining our QUERYURL,UserInput, and APIKEY. We also use Youtube's field parameters to refine wthe response we get. 
     var titleSearch = `${QUERYURL}search?part=snippet&maxResults=10&q=${userInput}Trailer${APIKEY}`
 
     // working fetch
@@ -68,13 +114,7 @@ var getMovieTrailer = function () {
 
 };
 
-
-getMovieTrailer();
-
-var displayMovieTrailer = function () {
-
-    
-}
+//getMovieTrailer();
 
 
 // When I want to save the movie for later, a list is created via localStorage with title and a link to the trailer
@@ -92,6 +132,8 @@ var displayMovieTrailer = function () {
 
 
 
+//Event Listeners
+movieFormEl.addEventListener("submit",formSubmitHandler);
 
 
 
@@ -108,28 +150,4 @@ var displayMovieTrailer = function () {
 
 
 
-     // fetch format that my tutor suggested
-
-    // fetch(apiUrl)
-    //     .then(function (res) { res.json() })
-    //     .then(function (responseData) {
-    //         console.log(responseData)
-    //         .catch(err => { console.log(err) })
-
-    // });
-
-
-     // original fetch request tried at the beginning with response but no data
-
-            // fetch(apiUrl)
-            // .then (function (response) {
-            //     if (response.ok) {
-            //         console.log (response);
-
-            //         response.json()
-            //         .then(function (data) {
-            //             console.log(data);
-            //         });
-            //     }
-            // })
 
