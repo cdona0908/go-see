@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>GO SEE</title>
 </head>
+
 <body>
     <header>
         <img src="./assets/images/logo.png">
@@ -23,39 +25,57 @@
                 <input type="text" id="input-movie" name="movie" placeholder="Movie title.."></input>
                 <input type="submit" value="Submit">
             </form>
+            <button id="modalBtn" class="button">View Trailer</button>
+            <div id="simpleModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span id="closeBtn">&times;</span>
+                        <iframe id="player" type="text/html" width="640" height="390"
+                            frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
             <form class="boxes">
                 <label for="start">Release Date</label>
-                 <input type="month" id="start" name="start"
-                 min="1950-01" value="2022-03">
+                <input type="month" id="start" name="start" min="1950-01" value="2022-03">
 
-        
-            <select id="genre"> 
-                <option value="Option 0">Select Genere</option>
-                <option value="Option 1">Comendy</option>
-                <option value="Option 2">Drama</option>
-                <option value="Option 3">Action</option>
-                <option value="Option 4">Horror</option>
-                <option value="Option 5">Sci-fi</option>
-                <option value="Option 6">Romance</option>
-                <option value="Option 7">Documentary</option>
-                <option value="Option 8">Thriller/Suspense</option>
-                <option value="Option 9">Sports</option>
-                <option value="Option 10">Animated</option>
-            </select>
-            <input type="submit" value="Submit">
+
+                <select id="genre">
+                    <option value="Option 0">Select Genere</option>
+                    <option value="Option 1">Comendy</option>
+                    <option value="Option 2">Drama</option>
+                    <option value="Option 3">Action</option>
+                    <option value="Option 4">Horror</option>
+                    <option value="Option 5">Sci-fi</option>
+                    <option value="Option 6">Romance</option>
+                    <option value="Option 7">Documentary</option>
+                    <option value="Option 8">Thriller/Suspense</option>
+                    <option value="Option 9">Sports</option>
+                    <option value="Option 10">Animated</option>
+                </select>
+                <input type="submit" value="Submit">
             </form>
         </div>
-        <div id="results-list" class="results"><ul></ul></div>
+        <div id="results-list" class="results">
+            <ul></ul>
+        </div>
         <div id="description-card" class="description"></div>
+
+
+
+
+
     </main>
+
+
+
     <aside class="favorites">
-        
+
         <div>
             <h2>Favorites</h2>
         </div>
     </aside>
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
-
-

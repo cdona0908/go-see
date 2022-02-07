@@ -2,8 +2,13 @@
 var movieFormEl = document.querySelector("#movie-form");
 var inputMovieEl = document.querySelector("#input-title");
 var descriptionContainer = document.querySelector("description-container");
+var modal = document.querySelector("#simpleModal");
+var modalBtnEl = document.querySelector("#modalBtn");
+var closeBtnEl = document.querySelector("#closeBtn");
+
 
 //---- Global Variables----//
+
 
 
 
@@ -49,6 +54,8 @@ var getMovieInfo = function(title){
     });
 };
 
+getMovieInfo ();
+
 //Display Movie Information Function
 
 var displayMovieInfo = function(info, titleEl){
@@ -85,10 +92,10 @@ var getMovieTrailer = function () {
     // var apiUrl = "http://www.omdbapi.com/?t=movie&y=2021&apikey=b1ac471e"
 
     // Gathering our user input and assigning it a name 
-    var userInput = 'MillionDOllarBabyMovie'
+    var userInput = 'IronMan'
 
     // Combining our QUERYURL,UserInput, and APIKEY. We also use Youtube's field parameters to refine wthe response we get. 
-    var titleSearch = `${QUERYURL}search?part=snippet&maxResults=10&q=${userInput}Trailer${APIKEY}`
+    var titleSearch = `${QUERYURL}search?part=snippet&maxResults=1&q=${userInput}Trailer${APIKEY}`
 
     // working fetch
     fetch(titleSearch)
@@ -108,17 +115,48 @@ var getMovieTrailer = function () {
 
             for (let i = 0; i < itemsArr.length; i++) {
                 const trailerId = itemsArr[i].id.videoId;
-                const Trailerlink = `${WATCHURL}${trailerId}`; 
+                const trailerLink = `${WATCHURL}${trailerId}`; 
             }
         });
 
 };
 
-//getMovieTrailer();
+getMovieTrailer();
+
+
+
+// Function to open modal
+function openModal () {
+  modal.style.display = 'block';
+};
+// Function to close modal
+function closeModal () {
+  modal.style.display = 'none';
+};
+// Function to close modal if outside click
+
+function outsideClick(e){
+  if(e.target == modal){
+    modal.style.display = 'none';
+  }
+}
+
+var displayMovieTrailer = function () {
+
+    if (itemsArr.length === 0) {
+        alert ("No trailer found");
+        return
+    }
+    
+
+}
+
+//
+
+
 
 
 // When I want to save the movie for later, a list is created via localStorage with title and a link to the trailer
-
 
 
 
@@ -133,7 +171,11 @@ var getMovieTrailer = function () {
 
 
 //Event Listeners
+window.addEventListener('click', outsideClick);
+closeBtnEl.addEventListener('click', closeModal);
+modalBtnEl.addEventListener('click', openModal);
 movieFormEl.addEventListener("submit",formSubmitHandler);
+
 
 
 
