@@ -153,6 +153,80 @@ var displayMovieInfo = function(info){
 
   descriptionContainer.appendChild(movieInfoContainer); 
 
+  //-------Awards------
+
+  //create container for awards
+  var awardsContainerEl = document.createElement("div");
+  awardsContainerEl.setAttribute("id","awards-container");
+  awardsContainerEl.setAttribute("class","awards-container");
+  
+  //create Awards Label
+  var awardsLabel = document.createElement("h3");
+  awardsLabel.textContent = 'Awards';  
+
+  //create icon for Awards
+  var awardsIcon = document.createElement("i");  
+  awardsIcon.setAttribute("class","fas fa-trophy");
+  
+  //create span for Awards
+  var awardList = document.createElement("span");
+  awardList.setAttribute("class","awards");
+  awardList.setAttribute("id","awards");
+  awardList.textContent = info.Awards;
+
+  awardsContainerEl.append( awardsLabel, awardsIcon,awardList);
+
+  //append awards to description container
+
+  descriptionContainer.appendChild(awardsContainerEl); 
+
+ //-------Cast & Crew------
+
+ //create container for Cast & Crew
+ var crewContainerEl = document.createElement("div");
+ crewContainerEl.setAttribute("id","crew-container");
+ crewContainerEl.setAttribute("class","crew-container");
+ //create Cast & Crew Label
+ var crewLabel = document.createElement("h3");
+ crewLabel.textContent = 'Cast & Crew';  
+
+ // Create Director elements
+ //Create container for directors
+ var directorsContainerEl = document.createElement("div");
+ directorsContainerEl.setAttribute("id","directors-container");
+ directorsContainerEl.setAttribute("class","directors-container");
+ //create Directors Label
+ var directorsEl = document.createElement("h4");
+ directorsEl.textContent = 'Directors:';
+ //create Directors List
+ var directorsList = document.createElement("span");  
+  directorsList.setAttribute("id","directors");
+  directorsList.textContent = info.Director;
+
+  directorsContainerEl.append(directorsEl,directorsList);
+
+ //Create Actors elements
+ //Create container for actors
+ var actorsContainerEl = document.createElement("div");
+ actorsContainerEl.setAttribute("id","actors-container");
+ actorsContainerEl.setAttribute("class","actors-container");
+ //create Actors Label
+ var actorsEl = document.createElement("h4");
+ actorsEl.textContent = 'Actors:';
+ //create Actors List
+ var actorsList = document.createElement("span");  
+  actorsList.setAttribute("id","actors");
+  actorsList.textContent = info.Actors;
+
+  actorsContainerEl.append(actorsEl, actorsList);
+  
+  //append actors and directors to cast & crew container
+
+  crewContainerEl.append(crewLabel, directorsContainerEl, actorsContainerEl);
+
+  //append Cast and Crew to description container
+
+  descriptionContainer.appendChild(crewContainerEl);
 
 };
 
