@@ -5,7 +5,6 @@ var resultEl = document.getElementById('results-list');
 
 //---- Global Variables----//
 
-
 //----Functions----//
 
 
@@ -27,31 +26,6 @@ var formSubmitHandler = function (event) {
   }
  
 };
-
-//Get Movie Information 
-var getMovieInfo = function(title){
-  // format the OMDB api url
-  var apiOmdbUrl = "http://www.omdbapi.com/?apikey=b1ac471e&t=" + title +"&plot=full";
-  //make OMDB api request
-  fetch(apiOmdbUrl)
-    .then(function(response) {
-      // request was successful
-      if (response.ok) {
-         console.log(response);
-         response.json().then(function(data) {
-          console.log(data);
-          //displayMovieInfo(data, title);          
-         });
-        } else {
-        alert("Error: " + response.statusText);
-        }
-    })
-    .catch(function(error) {
-      alert("Unable to connect to OMDB");
-    });
-  
-};
-
 
 //Display Movie Information Function
 
@@ -85,13 +59,11 @@ const WATCHURL = 'https://www.youtube.com/watch?v='
 
 var getMovieTrailer = function () {
 
-    // var apiUrl = "http://www.omdbapi.com/?t=movie&y=2021&apikey=b1ac471e"
-
     // Gathering our user input and assigning it a name 
-    var userInput = ''
+    var movieTitle = 'Fantastic Beasts and Where To Find Them'
 
     // Combining our QUERYURL,UserInput, and APIKEY. We also use Youtube's field parameters to refine wthe response we get. 
-    var titleSearch = `${QUERYURL}search?part=snippet&maxResults=1&q=${userInput}Trailer${YTAPIKEY}`
+    var titleSearch = `${QUERYURL}search?part=snippet&maxResults=1&q=${movieTitle}Trailer${YTAPIKEY}`
 
     // working fetch
     fetch(titleSearch)
@@ -111,6 +83,9 @@ var getMovieTrailer = function () {
         });
         
 };
+
+
+//Event Listeners
 movieFormEl.addEventListener("submit",formSubmitHandler);
 
 
@@ -135,7 +110,7 @@ movieFormEl.addEventListener("submit",formSubmitHandler);
 
 
 
-//Event Listeners
+
 
 
 
