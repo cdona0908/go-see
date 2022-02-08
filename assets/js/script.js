@@ -69,9 +69,9 @@ var displayMovieLink = function(trailerLink) {
   }; 
   var trailerLinkEl = document.createElement('a');
   trailerLinkEl.setAttribute('id', 'trailerLink');
-  trailerLinkEl.setAttribute('href',trailerLink)
+  trailerLinkEl.setAttribute('href',trailerLink);
   trailerLinkEl.textContent = trailerLink; 
-  resultEl.appendChild(trailerLinkEl)
+  resultEl.appendChild(trailerLinkEl);
 }
 
 // WHEN the user wants to search for a movie THEN they can input a year and genre to get a list selection
@@ -88,7 +88,7 @@ var getMovieTrailer = function () {
     // var apiUrl = "http://www.omdbapi.com/?t=movie&y=2021&apikey=b1ac471e"
 
     // Gathering our user input and assigning it a name 
-    var userInput = 'IronMan'
+    var userInput = ''
 
     // Combining our QUERYURL,UserInput, and APIKEY. We also use Youtube's field parameters to refine wthe response we get. 
     var titleSearch = `${QUERYURL}search?part=snippet&maxResults=1&q=${userInput}Trailer${YTAPIKEY}`
