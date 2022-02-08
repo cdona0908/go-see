@@ -1,34 +1,31 @@
 //----Selectors----//
-var movieFormEl = document.querySelector("#movie-form");
-var inputMovieEl = document.querySelector("#input-title");
-var descriptionContainer = document.querySelector("description-container");
-var modal = document.querySelector("#simpleModal");
-var modalBtnEl = document.querySelector("#modalBtn");
-var closeBtnEl = document.querySelector("#closeBtn");
-
+var movieFormEl = document.getElementById("title");
+var searchInputEl = document.getElementById('input-movie');
+var resultEl = document.getElementById('results-list');
 
 //---- Global Variables----//
 
 
-
-
 //----Functions----//
+
 
 // Search Movie by Title 
 var formSubmitHandler = function (event) {
   // prevent page from refreshing
-  event.preventDefault();
   // get value from input element
-  var movieTitle = inputMovieEl.value.trim();
-
-  if (movieTitle) {
-      getMovieInfo(movieTitle);
+  var movieTitle = searchInputEl.value.trim();
+  console.log(`this is the movie you searched ${movieTitle}`)
+  event.preventDefault();
+ if (movieTitle) {
+      // getMovieInfo(movieTitle);
+      getMovieTrailer(movieTitle)
+      console.log(movieTitle)
       // clear old content
-      inputMovieEl.value = "";
+      searchInputEl.value = "";
   } else {
       alert("Please enter a valid movie title");
   }
-  
+ 
 };
 
 //Get Movie Information 
@@ -52,40 +49,39 @@ var getMovieInfo = function(title){
     .catch(function(error) {
       alert("Unable to connect to OMDB");
     });
+  
 };
 
-getMovieInfo ();
 
 //Display Movie Information Function
 
-var displayMovieInfo = function(info, titleEl){
+var displayMovieInfo= function(info){
   // check if api returned any movies
   if (info.length === 0){
     alert("No movies found with that title");
     return;
   }
-
 };
 
+var displayMovieLink = function(trailerLink) {
+  if(!trailerLink){
+    return 'Failed To Load Trailer Link';
+  }; 
+  var trailerLinkEl = document.createElement('a');
+  trailerLinkEl.setAttribute('id', 'trailerLink');
+  trailerLinkEl.setAttribute('href',trailerLink)
+  trailerLinkEl.textContent = trailerLink; 
+  resultEl.appendChild(trailerLinkEl)
+}
 
 // WHEN the user wants to search for a movie THEN they can input a year and genre to get a list selection
 
-
-
-
-
 //  WHEN the user gets a list, THEN the year of release, awards, ratings, run time is given
 
-
-
-
-
-
 //  Congregating our urls to use later.
-const APIKEY = '&key=AIzaSyAI0RHGWb89XVlFFWks7NfYy0J0uQRu-HY'
+const YTAPIKEY = '&key=AIzaSyAI0RHGWb89XVlFFWks7NfYy0J0uQRu-HY'
 const QUERYURL = 'https://youtube.googleapis.com/youtube/v3/'
 const WATCHURL = 'https://www.youtube.com/watch?v='
-
 
 var getMovieTrailer = function () {
 
@@ -95,7 +91,7 @@ var getMovieTrailer = function () {
     var userInput = 'IronMan'
 
     // Combining our QUERYURL,UserInput, and APIKEY. We also use Youtube's field parameters to refine wthe response we get. 
-    var titleSearch = `${QUERYURL}search?part=snippet&maxResults=1&q=${userInput}Trailer${APIKEY}`
+    var titleSearch = `${QUERYURL}search?part=snippet&maxResults=1&q=${userInput}Trailer${YTAPIKEY}`
 
     // working fetch
     fetch(titleSearch)
@@ -104,52 +100,21 @@ var getMovieTrailer = function () {
             return response.json();
         })
         .then(function (data) {
-            console.log();
-            // We Console log our response data before taking out waht we need. 
-            console.log("Data:",data);
-
             // take itemes arr from data
             var itemsArr = data.items;
-        
             // itemsarr.forEach((item)=>{ YOUR CODE HERE })
-
-            for (let i = 0; i < itemsArr.length; i++) {
-                const trailerId = itemsArr[i].id.videoId;
-                const trailerLink = `${WATCHURL}${trailerId}`; 
-            }
+            const trailerId = itemsArr[0].id.videoId;
+            const trailerLink = `${WATCHURL}${trailerId}`; 
+            displayMovieLink(trailerLink)
+        }).catch((err)=>{
+          console.error(err)
         });
-
+        
 };
-
-getMovieTrailer();
-
+movieFormEl.addEventListener("submit",formSubmitHandler);
 
 
-// Function to open modal
-function openModal () {
-  modal.style.display = 'block';
-};
-// Function to close modal
-function closeModal () {
-  modal.style.display = 'none';
-};
-// Function to close modal if outside click
 
-function outsideClick(e){
-  if(e.target == modal){
-    modal.style.display = 'none';
-  }
-}
-
-var displayMovieTrailer = function () {
-
-    if (itemsArr.length === 0) {
-        alert ("No trailer found");
-        return
-    }
-    
-
-}
 
 //
 
@@ -171,10 +136,7 @@ var displayMovieTrailer = function () {
 
 
 //Event Listeners
-window.addEventListener('click', outsideClick);
-closeBtnEl.addEventListener('click', closeModal);
-modalBtnEl.addEventListener('click', openModal);
-movieFormEl.addEventListener("submit",formSubmitHandler);
+
 
 
 

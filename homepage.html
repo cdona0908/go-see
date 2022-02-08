@@ -21,24 +21,13 @@
     </header>
     <main>
         <div class="search">
-            <form class="title">
-                <input type="text" id="input-movie" name="movie" placeholder="Movie title.."></input>
-                <input type="submit" value="Submit">
+            <form id="title">
+                <input type="text" id="input-movie" name="movie" placeholder="Movie title..">
+                <button id="searchBtn" type="submit" for="movie">Search</button>
             </form>
-            <button id="modalBtn" class="button">View Trailer</button>
-            <div id="simpleModal" class="modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <span id="closeBtn">&times;</span>
-                        <iframe id="player" type="text/html" width="640" height="390"
-                            frameborder="0"></iframe>
-                    </div>
-                </div>
-            </div>
-            <form class="boxes">
+            <!-- <form class="boxes">
                 <label for="start">Release Date</label>
                 <input type="month" id="start" name="start" min="1950-01" value="2022-03">
-
 
                 <select id="genre">
                     <option value="Option 0">Select Genere</option>
@@ -54,20 +43,15 @@
                     <option value="Option 10">Animated</option>
                 </select>
                 <input type="submit" value="Submit">
-            </form>
+            </form> -->
         </div>
-        <div id="results-list" class="results">
-            <ul></ul>
+        <div id="results-list">
+            <img id="movieArt" alt="movieArt">
+            <h3 id="movieTitle">Iron man</h3>
+            <p id="movieDesc"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae quo nulla rerum reiciendis accusantium nihil at modi aut? Provident nesciunt similique veniam sint perferendis adipisci corrupti quam, facere at. Est?</p>
+            
         </div>
-        <div id="description-card" class="description"></div>
-
-
-
-
-
     </main>
-
-
 
     <aside class="favorites">
 
