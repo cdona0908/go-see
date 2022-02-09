@@ -5,23 +5,22 @@ var descriptionContainer = document.querySelector("#description-container");
 
 //---- Global Variables----//
 
+
+
+
 //----Functions----//
-
-
 
 
 
 // Search Movie by Title 
 var formSubmitHandler = function (event) {
   // prevent page from refreshing
-  // get value from input element
-  var movieTitle = searchInputEl.value.trim();
-  console.log(`this is the movie you searched ${movieTitle}`)
   event.preventDefault();
- if (movieTitle) {
-      // getMovieInfo(movieTitle);
-      getMovieTrailer(movieTitle)
-      console.log(movieTitle)
+  // get value from input element
+  var movieTitle = inputMovieEl.value.trim();
+
+  if (movieTitle) {
+      getMovieInfo(movieTitle);
       // clear old content
       inputMovieEl.value = "";
       descriptionContainer.textContent = "";
