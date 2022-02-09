@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <title>GO SEE</title>
+    <link rel="stylesheet" href=".assets/css/foundation.css">
+    <title>GOSEE</title>
 </head>
 <body>
     <header>
@@ -18,43 +22,59 @@
         </nav>
     </header>
     <main>
-        <div class="search">
-            <form class="title">
-                <input type="text" id="input-movie" name="movie" placeholder="Movie title.."></input>
-                <input type="submit" value="Submit">
+        <!--Search Movie Section-->
+        <div class="card">
+            <h3 class="card-header text-uppercase">Search Movie By Title</h3>
+            <form id= "movie-form" class="card-body">
+                <input id="input-title" name="movie-title" placeholder="Enter title here" type="text" autofocus="true" class="form-input"/>
+                <button type="submit" class="btn"><strong>Search</strong></button>
             </form>
-            <form class="boxes">
-                <label for="start">Release Date</label>
-                 <input type="month" id="start" name="start"
-                 min="1950-01" value="2022-03">
-
-        
-            <select id="genre"> 
-                <option value="Option 0">Select Genere</option>
-                <option value="Option 1">Comendy</option>
-                <option value="Option 2">Drama</option>
-                <option value="Option 3">Action</option>
-                <option value="Option 4">Horror</option>
-                <option value="Option 5">Sci-fi</option>
-                <option value="Option 6">Romance</option>
-                <option value="Option 7">Documentary</option>
-                <option value="Option 8">Thriller/Suspense</option>
-                <option value="Option 9">Sports</option>
-                <option value="Option 10">Animated</option>
-            </select>
-            <input type="submit" value="Submit">
-            </form>
+            <!-- <select></select>
+            <select></select> -->
         </div>
+        <!--List of Movies Section-->
         <div id="results-list" class="results"><ul></ul></div>
-        <div id="description-card" class="description"></div>
-    </main>
-    <aside class="favorites">
-        
-        <div>
-            <h2>Favorites</h2>
+        <!--Movie Description Section-->
+        <div id="description-container" class="description">
+            <!--Movie Title-->
+            <h2><span id="movie-title"></span></h2>
+            <!--Release Year,Runtime and Genre Info-->
+            <div>
+                <span id="release-year"></span>
+                <span id="runtime"></span>
+                <span id="genre"></span>
+            </div>
+            <!--Trailer-->
+            <div class="video-container">
+            </div>
+            <!--Movie Plot-->
+            <div id="movie-info">
+                <h3></h3>
+                <p><span id="plot"></span> </p>
+                <!--Button to Save Movie to Favorite's List-->
+            </div>
+            <!--Cast and Crew Section-->
+            <div class="crew-container">
+                <h3></h3>
+                <p></p>
+                <h4> <span id="director"></span></h4>
+                <p></p>
+                <h4><span id="actors"></span></h4>
+                <p></p>
+            </div>
+
         </div>
-    </aside>
-    <script src="./assets/js/script.js"></script>
+
+    </main>
+    <section class="favorites">
+        <div>
+            <h1>Favorites</h1>
+        </div>
+    </section>
+    <footer>
+
+    </footer>
+    <script src="./assets/js/script.js"></script>   
 </body>
 </html>
 
