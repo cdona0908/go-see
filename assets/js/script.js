@@ -3,9 +3,13 @@ var movieFormEl = document.getElementById("title");
 var searchInputEl = document.getElementById('input-movie');
 var resultEl = document.getElementById('results-list');
 
+
 //---- Global Variables----//
 
 //----Functions----//
+
+
+
 
 
 // Search Movie by Title 
@@ -57,15 +61,15 @@ const YTAPIKEY = '&key=AIzaSyAI0RHGWb89XVlFFWks7NfYy0J0uQRu-HY'
 const QUERYURL = 'https://youtube.googleapis.com/youtube/v3/'
 const WATCHURL = 'https://www.youtube.com/watch?v='
 
-var getMovieTrailer = function () {
+var getMovieTrailer = function (movieTitle) {
 
     // Gathering our user input and assigning it a name 
-    var movieTitle = 'Fantastic Beasts and Where To Find Them'
+  
 
     // Combining our QUERYURL,UserInput, and APIKEY. We also use Youtube's field parameters to refine wthe response we get. 
-    var titleSearch = `${QUERYURL}search?part=snippet&maxResults=1&q=${movieTitle}Trailer${YTAPIKEY}`
+    var titleSearch = `${QUERYURL}search?part=snippet&maxResults=1&channelId=UCi8e0iOVk1fEOogdfu4YgfA&q=${movieTitle}${YTAPIKEY}`
+    
 
-    // working fetch
     fetch(titleSearch)
         .then(function (response) {
             console.log("response");
@@ -86,12 +90,13 @@ var getMovieTrailer = function () {
 
 
 //Event Listeners
+
 movieFormEl.addEventListener("submit",formSubmitHandler);
 
 
 
 
-//
+
 
 
 
