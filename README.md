@@ -2,7 +2,7 @@
 
 ## Description
 
-The following GoSee application is a movie content organizer with two main aims: to provide brief plot descriptions with ratings as well as trailers to movies both past and currently in theaters.  The second purpose is to provide the user with an easily accessible list of films they have saved for future reference.  The styles have been built partially using the ____ library.  The app synthesizes data from the omdb and the youtube data api.  It has a clean and polished user interface and is responsive, with small screens in mind.  
+The following GoSee application is a movie content organizer with two main aims: to provide brief plot descriptions with ratings as well as trailers to movies both past and currently in theaters.  The second purpose is to provide the user with an easily accessible list of films they have saved for future reference.  The styles have been built partially using the Skeleton and CSS Wand libraries.  The app also synthesizes data from the omdb and the youtube data api.  It has a clean and polished user interface and is responsive, with small screens in mind.  
 
 ## Programming Languages
 
@@ -25,6 +25,8 @@ Upload the following elements to the web server used:
 * A trailer to the movie can be viewed from a link at the bottom of the search description.
 
 * When the user clicks the save to favorites button the description card is saved in a list from which it can also be removed.
+
+
 
 
 
