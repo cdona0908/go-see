@@ -235,3 +235,10 @@
   @media screen and (min-width: ) {
     
   }
+
+  #favorites-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  }

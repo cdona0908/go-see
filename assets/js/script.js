@@ -131,7 +131,11 @@ var displayMovieInfo = function(info){
   saveToWatchBtn.setAttribute("id","save-movie");
   saveToWatchBtn.setAttribute("type","submit");
   saveToWatchBtn.textContent="Save";
-  descriptionContainer.appendChild(saveToWatchBtn);  
+  saveToWatchBtn.onclick=function(){
+    addMovieToFavorite(info)
+  }
+  descriptionContainer.appendChild(saveToWatchBtn);
+   
 
   //-------Plot------
 
@@ -310,4 +314,27 @@ movieFormEl.addEventListener("submit",formSubmitHandler);
 
 
 
+// movie gets added to movie container
+var addMovieToFavorite = function(movie){
+  // check if movie iss already added to favorites
+  if (favorites.indexOf(movie)>=0)
+    return;
 
+    //adds movie to container
+    favorites.push(movie)
+var favoritesContainer = document.getElementById ("favorites-container");
+var basicInfoEl = document.createElement("div");
+
+// adds onclick to remove from favorites
+basicInfoEl.onclick = function(){
+  basicInfoEl.remove();
+  favorites.pop(movie)
+}
+//create span element for year
+var poster = document.createElement("img");
+poster.setAttribute("src",movie.Poster);
+// yearEl.textContent = movie.Title;
+basicInfoEl.appendChild(poster);
+favoritesContainer.appendChild(basicInfoEl)
+}
+var favorites = []
