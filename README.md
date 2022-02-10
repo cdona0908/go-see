@@ -14,7 +14,7 @@ The following GoSee application is a movie content organizer with two main aims:
 
 Upload the following elements to the web server used: 
 
-* File homepage.html
+* File index.html
 
 * Folder Assets containing the CSS stylesheet and the Javascript file
 
