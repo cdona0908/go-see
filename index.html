@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>GOSEE</title>
+</head>
+<body>
+    <header>
+        <!--Add Hero-->
+        <h1><i class="fas fa-popcorn"></i>GO-SEE</h1>
+        <nav></nav>
+    </header>
+
+    <main>
+        <!--Search Movie Section-->
+        <div class="card">
+            <h3 class="card-header text-uppercase">Search Movie By Title</h3>
+            <form id= "movie-form" class="card-body">
+                <input id="input-title" name="movie-title" placeholder="Enter title here" type="text" autofocus="true" class="form-input"/>
+                <button type="submit" class="btn">Search</button>
+            </form>
+            <!-- <select></select>
+            <select></select> -->
+        </div>
+        <!--List of Movies Section-->
+        <div id="results-list" class="results"><ul></ul></div>
+
+        <!--Movie Description Section-->
+        <div id="description-container" class="description">
+            
+        
+            <!--Trailer-->
+            <div class="video-container">
+                
+            </div>            
+           
+            <!--Awards Section-->
+            <div class="awards-container" id="awards-container">
+                
+            </div>
+            <!--Cast and Crew Section-->
+            <div class="crew-container" id="crew-container">
+                
+            </div>
+
+        </div>
+
+    </main>
+    <aside class="favorites">
+        <div></div>
+    </aside>
+    <script src="./assets/js/script.js"></script>   
+</body>
+</html>
