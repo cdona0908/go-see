@@ -95,6 +95,23 @@ var displayMovieInfo = function(info){
 
   //-----Movie Trailer-----Add containers and call trailer function here
 
+  var trailerContainerEl = document.createElement("div");
+  trailerContainerEl.setAttribute("class","video-container");
+  // create variable to hold yhe videoId  
+  var returnedVideoId = "TcMBFSGVi1c";
+  //create iframe for trailer 
+  var trailerVideoEl = document.createElement("iframe");
+  trailerVideoEl.setAttribute("id","player");
+  trailerVideoEl.setAttribute("type","text/html");
+  trailerVideoEl.setAttribute("width","640");
+  trailerVideoEl.setAttribute("height","390");
+  trailerVideoEl.setAttribute("src","http://www.youtube.com/embed/" + returnedVideoId + "?enablejsapi=1&origin=http://example.com");
+  trailerVideoEl.setAttribute("frameborder","0");
+  //append trailer video to trailer container
+  trailerContainerEl.appendChild(trailerVideoEl);
+  //append trailer container to description container
+  descriptionContainer.appendChild(trailerContainerEl);
+
   //-------Ratings------
   //create container for rates
   var ratesEl = document.createElement("div");
