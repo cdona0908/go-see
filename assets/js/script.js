@@ -37,7 +37,7 @@ var formSubmitHandler = function (event) {
 var getMovieInfo = function(title){
   
   // format the OMDB api url
-  var apiOmdbUrl = "http://www.omdbapi.com/?apikey=b1ac471e&t=" + title +"&plot=full";
+  var apiOmdbUrl = "https://www.omdbapi.com/?apikey=b1ac471e&t=" + title +"&plot=full";
   //make OMDB api request
   fetch(apiOmdbUrl)
     .then(function(response) {
