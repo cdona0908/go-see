@@ -21,6 +21,7 @@ var formSubmitHandler = function (event) {
 
   if (movieTitle) {
       getMovieInfo(movieTitle);
+      
       getMovieTrailer(movieTitle);
       // clear old content
       inputMovieEl.value = "";
@@ -34,6 +35,7 @@ var formSubmitHandler = function (event) {
 
 //Get Movie Information 
 var getMovieInfo = function(title){
+  
   // format the OMDB api url
   var apiOmdbUrl = "http://www.omdbapi.com/?apikey=b1ac471e&t=" + title +"&plot=full";
   //make OMDB api request
@@ -98,25 +100,11 @@ var displayMovieInfo = function(info){
   
   //append basic info to container
   descriptionContainer.appendChild(basicInfoEl);
+  
 
   //-----Movie Trailer-----Add containers and call trailer function here
 
-  var trailerContainerEl = document.createElement("div");
-  trailerContainerEl.setAttribute("class","video-container");
-  // create variable to hold yhe videoId  
-  var returnedVideoId = "TcMBFSGVi1c";
-  //create iframe for trailer 
-  var trailerVideoEl = document.createElement("iframe");
-  trailerVideoEl.setAttribute("id","player");
-  trailerVideoEl.setAttribute("type","text/html");
-  trailerVideoEl.setAttribute("width","640");
-  trailerVideoEl.setAttribute("height","390");
-  trailerVideoEl.setAttribute("src","http://www.youtube.com/embed/" + returnedVideoId + "?enablejsapi=1&origin=http://example.com");
-  trailerVideoEl.setAttribute("frameborder","0");
-  //append trailer video to trailer container
-  trailerContainerEl.appendChild(trailerVideoEl);
-  //append trailer container to description container
-  descriptionContainer.appendChild(trailerContainerEl);
+ 
 
   //-------Ratings------
   //create container for rates
@@ -273,33 +261,56 @@ const YTAPIKEY = '&key=AIzaSyAI0RHGWb89XVlFFWks7NfYy0J0uQRu-HY'
 const QUERYURL = 'https://youtube.googleapis.com/youtube/v3/'
 const WATCHURL = 'https://www.youtube.com/watch?v='
 
-var getMovieTrailer = function (movieTitle) {
+var getMovieTrailer = function (movieName) {
 
     // Gathering our user input and assigning it a name 
   
 
     // Combining our QUERYURL,UserInput, and APIKEY. We also use Youtube's field parameters to refine wthe response we get. 
-    var titleSearch = `${QUERYURL}search?part=snippet&maxResults=1&channelId=UCi8e0iOVk1fEOogdfu4YgfA&q=${movieTitle}${YTAPIKEY}`
+    var titleSearch = `${QUERYURL}search?part=snippet&maxResults=1&channelId=UCi8e0iOVk1fEOogdfu4YgfA&q=${movieName}${YTAPIKEY}`;
+    
     
 
     fetch(titleSearch)
         .then(function (response) {
-            console.log("response");
+            console.log(response);
             return response.json();
         })
         .then(function (data) {
             // take itemes arr from data
+            console.log(data);
             var itemsArr = data.items;
             // itemsarr.forEach((item)=>{ YOUR CODE HERE })
             const trailerId = itemsArr[0].id.videoId;
-            const trailerLink = `${WATCHURL}${trailerId}`; 
-            displayMovieLink(trailerLink)
+            console.log(trailerId);
+            displayMovieTrailer(trailerId);
+                        
+            //const trailerLink = `${WATCHURL}${trailerId}`;             
+            //displayMovieLink(trailerLink)
         }).catch((err)=>{
           console.error(err)
         });
-        
+    
 };
 
+var displayMovieTrailer = function(movieId){
+  var trailerContainerEl = document.createElement("div");
+  trailerContainerEl.setAttribute("class","video-container");
+  // create variable to hold yhe videoId  
+  var returnedVideoId = movieId;
+  //create iframe for trailer 
+  var trailerVideoEl = document.createElement("iframe");
+  trailerVideoEl.setAttribute("id","player");
+  trailerVideoEl.setAttribute("type","text/html");
+  trailerVideoEl.setAttribute("width","640");
+  trailerVideoEl.setAttribute("height","390");
+  trailerVideoEl.setAttribute("src","http://www.youtube.com/embed/" + returnedVideoId + "?enablejsapi=1");
+  trailerVideoEl.setAttribute("frameborder","0");
+  //append trailer video to trailer container
+  trailerContainerEl.appendChild(trailerVideoEl);
+  //append trailer container to description container
+  descriptionContainer.appendChild(trailerContainerEl);
+};
 
 //Event Listeners
 
