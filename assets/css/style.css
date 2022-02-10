@@ -186,3 +186,21 @@ background-color: #7F7F7F;
     color: var(--primary);
     }
     
+  .button{
+    display: inline-block;
+    position: relative;
+    color: var(--white);
+    background-color: var(--tertiary);
+    border: 1px solid var(--primary);
+    border-radius: 4px;
+    padding: 0 15px;
+    cursor: pointer;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .button:hover{
+    background: var(--secondary);
+  }
+
+  

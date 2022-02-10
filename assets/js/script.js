@@ -1,13 +1,16 @@
 //----Selectors----//
-var movieFormEl = document.querySelector("#movie-form");
-var inputMovieEl = document.querySelector("#input-title");
+var movieFormEl = document.querySelector("#title");
+var inputMovieEl = document.querySelector("#input-movie");
 var descriptionContainer = document.querySelector("#description-container");
 
 //---- Global Variables----//
 
 
 
+
 //----Functions----//
+
+
 
 // Search Movie by Title 
 var formSubmitHandler = function (event) {
@@ -18,6 +21,7 @@ var formSubmitHandler = function (event) {
 
   if (movieTitle) {
       getMovieInfo(movieTitle);
+      getMovieTrailer(movieTitle);
       // clear old content
       inputMovieEl.value = "";
       descriptionContainer.textContent = "";
@@ -26,6 +30,7 @@ var formSubmitHandler = function (event) {
   }
   
 };
+
 
 //Get Movie Information 
 var getMovieInfo = function(title){
@@ -248,67 +253,67 @@ var displayMovieInfo = function(info){
 
 };
 
+var displayMovieLink = function(trailerLink) {
+  if(!trailerLink){
+    return 'Failed To Load Trailer Link';
+  }; 
+  var trailerLinkEl = document.createElement('a');
+  trailerLinkEl.setAttribute('id', 'trailerLink');
+  trailerLinkEl.setAttribute('href',trailerLink);
+  trailerLinkEl.textContent = trailerLink; 
+  descriptionContainer.appendChild(trailerLinkEl);
+}
 
 // WHEN the user wants to search for a movie THEN they can input a year and genre to get a list selection
 
-
-
-
-
 //  WHEN the user gets a list, THEN the year of release, awards, ratings, run time is given
 
-
-
-
-
-
 //  Congregating our urls to use later.
-const APIKEY = '&key=AIzaSyAI0RHGWb89XVlFFWks7NfYy0J0uQRu-HY'
+const YTAPIKEY = '&key=AIzaSyAI0RHGWb89XVlFFWks7NfYy0J0uQRu-HY'
 const QUERYURL = 'https://youtube.googleapis.com/youtube/v3/'
 const WATCHURL = 'https://www.youtube.com/watch?v='
 
-
-
-var getMovieTrailer = function () {
-
-    // var apiUrl = "http://www.omdbapi.com/?t=movie&y=2021&apikey=b1ac471e"
+var getMovieTrailer = function (movieTitle) {
 
     // Gathering our user input and assigning it a name 
-    var userInput = 'MillionDOllarBabyMovie'
+  
 
     // Combining our QUERYURL,UserInput, and APIKEY. We also use Youtube's field parameters to refine wthe response we get. 
-    var titleSearch = `${QUERYURL}search?part=snippet&maxResults=10&q=${userInput}Trailer${APIKEY}`
+    var titleSearch = `${QUERYURL}search?part=snippet&maxResults=1&channelId=UCi8e0iOVk1fEOogdfu4YgfA&q=${movieTitle}${YTAPIKEY}`
+    
 
-    // working fetch
     fetch(titleSearch)
         .then(function (response) {
             console.log("response");
             return response.json();
         })
         .then(function (data) {
-            console.log();
-            // We Console log our response data before taking out waht we need. 
-            console.log("Data:",data);
-
             // take itemes arr from data
             var itemsArr = data.items;
-        
-
             // itemsarr.forEach((item)=>{ YOUR CODE HERE })
-
-            for (let i = 0; i < itemsArr.length; i++) {
-                const trailerId = itemsArr[i].id.videoId;
-                const Trailerlink = `${WATCHURL}${trailerId}`; 
-            }
+            const trailerId = itemsArr[0].id.videoId;
+            const trailerLink = `${WATCHURL}${trailerId}`; 
+            displayMovieLink(trailerLink)
+        }).catch((err)=>{
+          console.error(err)
         });
-
+        
 };
 
-//getMovieTrailer();
+
+//Event Listeners
+
+movieFormEl.addEventListener("submit", formSubmitHandler);
+
+
+
+
+
+
+
 
 
 // When I want to save the movie for later, a list is created via localStorage with title and a link to the trailer
-
 
 
 
@@ -322,8 +327,9 @@ var getMovieTrailer = function () {
 
 
 
-//Event Listeners
-movieFormEl.addEventListener("submit",formSubmitHandler);
+
+
+
 
 
 
