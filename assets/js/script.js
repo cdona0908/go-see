@@ -306,7 +306,7 @@ var displayMovieTrailer = function(movieId){
   trailerVideoEl.setAttribute("type","text/html");
   trailerVideoEl.setAttribute("width","640");
   trailerVideoEl.setAttribute("height","390");
-  trailerVideoEl.setAttribute("src","http://www.youtube.com/embed/" + returnedVideoId + "?enablejsapi=1");
+  trailerVideoEl.setAttribute("src","https://www.youtube.com/embed/" + returnedVideoId + "?enablejsapi=1");
   trailerVideoEl.setAttribute("frameborder","0");
   //append trailer video to trailer container
   trailerContainerEl.append(trailerTitleEl, trailerVideoEl);
