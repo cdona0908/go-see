@@ -14,7 +14,7 @@ The following GoSee application is a movie content organizer with two main aims:
 
 Upload the following elements to the web server used: 
 
-* File homepage.html
+* File index.html
 
 * Folder Assets containing the CSS stylesheet and the Javascript file
 
@@ -26,7 +26,7 @@ Upload the following elements to the web server used:
 
 * When the user clicks the save to favorites button the description card is saved in a list from which it can also be removed.
 
-
+![](images/sitenapshot.jpg)
 
 
 
