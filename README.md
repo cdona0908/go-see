@@ -29,11 +29,11 @@ Upload the following elements to the web server used:
 
 
 
-# URL of the deployed application (GitHub Pages):
+### URL of the deployed application (GitHub Pages):
 
 https://cdona0908.github.io/go-see/
 
-# URL of the GitHub repository:
+### URL of the GitHub repository:
 
 https://github.com/cdona0908/go-see.git
 
