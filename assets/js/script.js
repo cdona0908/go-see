@@ -296,6 +296,8 @@ var getMovieTrailer = function (movieName) {
 var displayMovieTrailer = function(movieId){
   var trailerContainerEl = document.createElement("div");
   trailerContainerEl.setAttribute("class","video-container");
+  var trailerTitleEl = document.createElement("h3");
+  trailerTitleEl.textContent = 'Trailer';
   // create variable to hold yhe videoId  
   var returnedVideoId = movieId;
   //create iframe for trailer 
@@ -307,7 +309,7 @@ var displayMovieTrailer = function(movieId){
   trailerVideoEl.setAttribute("src","http://www.youtube.com/embed/" + returnedVideoId + "?enablejsapi=1");
   trailerVideoEl.setAttribute("frameborder","0");
   //append trailer video to trailer container
-  trailerContainerEl.appendChild(trailerVideoEl);
+  trailerContainerEl.append(trailerTitleEl, trailerVideoEl);
   //append trailer container to description container
   descriptionContainer.appendChild(trailerContainerEl);
 };
