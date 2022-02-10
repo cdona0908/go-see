@@ -59,11 +59,7 @@ var displayMovieInfo = function(info){
     alert("No movies found with that title");
     return;
   }
-  else if (response = "False"){
-    alert("Please choose a valid movie name");
-    return;
-
-  }
+    
   //-----movie Title----
 
   //create h2 element for movie title
