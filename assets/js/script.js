@@ -67,6 +67,7 @@ var displayMovieInfo = function(info){
   titleEl.textContent = info.Title;
   // append to container
   descriptionContainer.appendChild(titleEl);
+  
 
   //---------movie year, runtime and genre------
 

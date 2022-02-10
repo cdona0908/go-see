@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href=".assets/css/foundation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     <title>GOSEE</title>
 </head>
 <body>
@@ -32,14 +33,16 @@
             <!-- <select></select>
             <select></select> -->
         </div>
-        <!--List of Movies Section-->
-        <div id="results-list" class="results"><ul></ul></div>
         <!--Movie Description Section-->
         <div id="description-container" class="description">
             <!--Movie Title-->
             <h2><span id="movie-title"></span></h2>
-            <!--Release Year,Runtime and Genre Info-->
+            <div id="movie-info">
+                <h3></h3>
+                <p><span id="plot"></span> </p>
+            </div>
             <div>
+                <!--Release Year,Runtime and Genre Info-->
                 <span id="release-year"></span>
                 <span id="runtime"></span>
                 <span id="genre"></span>
@@ -48,11 +51,6 @@
             <div class="video-container">
             </div>
             <!--Movie Plot-->
-            <div id="movie-info">
-                <h3></h3>
-                <p><span id="plot"></span> </p>
-                <!--Button to Save Movie to Favorite's List-->
-            </div>
             <!--Cast and Crew Section-->
             <div class="crew-container">
                 <h3></h3>
