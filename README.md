@@ -26,7 +26,8 @@ Upload the following elements to the web server used:
 
 * When the user clicks the save to favorites button the description card is saved in a list from which it can also be removed.
 
-![](images/sitenapshot.jpg)
+![](./images/sitenapshot.jpg)
+
 
 
 
