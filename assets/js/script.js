@@ -1,6 +1,6 @@
 //----Selectors----//
-var movieFormEl = document.querySelector("#movie-form");
-var inputMovieEl = document.querySelector("#input-title");
+var movieFormEl = document.querySelector("#title");
+var inputMovieEl = document.querySelector("#input-movie");
 var descriptionContainer = document.querySelector("#description-container");
 
 //---- Global Variables----//
@@ -21,6 +21,7 @@ var formSubmitHandler = function (event) {
 
   if (movieTitle) {
       getMovieInfo(movieTitle);
+      getMovieTrailer(movieTitle);
       // clear old content
       inputMovieEl.value = "";
       descriptionContainer.textContent = "";
@@ -29,6 +30,7 @@ var formSubmitHandler = function (event) {
   }
   
 };
+
 
 //Get Movie Information 
 var getMovieInfo = function(title){
@@ -241,7 +243,7 @@ var displayMovieLink = function(trailerLink) {
   trailerLinkEl.setAttribute('id', 'trailerLink');
   trailerLinkEl.setAttribute('href',trailerLink);
   trailerLinkEl.textContent = trailerLink; 
-  resultEl.appendChild(trailerLinkEl);
+  descriptionContainer.appendChild(trailerLinkEl);
 }
 
 // WHEN the user wants to search for a movie THEN they can input a year and genre to get a list selection
@@ -283,7 +285,7 @@ var getMovieTrailer = function (movieTitle) {
 
 //Event Listeners
 
-movieFormEl.addEventListener("submit",formSubmitHandler);
+movieFormEl.addEventListener("submit", formSubmitHandler);
 
 
 
