@@ -141,6 +141,7 @@ var displayMovieInfo = function(info){
   saveToWatchBtn.setAttribute("class","btn");
   saveToWatchBtn.setAttribute("id","save-movie");
   saveToWatchBtn.setAttribute("type","submit");
+  saveToWatchBtn.textContent = "Add to Favorites";
   
   descriptionContainer.appendChild(saveToWatchBtn);  
 
