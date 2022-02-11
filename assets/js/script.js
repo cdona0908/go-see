@@ -37,7 +37,7 @@ var formSubmitHandler = function (event) {
 var getMovieInfo = function(title){
   
   // format the OMDB api url
-  var apiOmdbUrl = "http://www.omdbapi.com/?apikey=b1ac471e&t=" + title +"&plot=full";
+  var apiOmdbUrl = "https://www.omdbapi.com/?apikey=b1ac471e&t=" + title +"&plot=full";
   //make OMDB api request
   fetch(apiOmdbUrl)
     .then(function(response) {
@@ -141,6 +141,7 @@ var displayMovieInfo = function(info){
   saveToWatchBtn.setAttribute("class","btn");
   saveToWatchBtn.setAttribute("id","save-movie");
   saveToWatchBtn.setAttribute("type","submit");
+  saveToWatchBtn.textContent = "Add to Favorites";
   
   descriptionContainer.appendChild(saveToWatchBtn);  
 
@@ -304,7 +305,7 @@ var displayMovieTrailer = function(movieId){
   trailerVideoEl.setAttribute("type","text/html");
   trailerVideoEl.setAttribute("width","640");
   trailerVideoEl.setAttribute("height","390");
-  trailerVideoEl.setAttribute("src","http://www.youtube.com/embed/" + returnedVideoId + "?enablejsapi=1");
+  trailerVideoEl.setAttribute("src","https://www.youtube.com/embed/" + returnedVideoId + "?enablejsapi=1");
   trailerVideoEl.setAttribute("frameborder","0");
   //append trailer video to trailer container
   trailerContainerEl.appendChild(trailerVideoEl);
