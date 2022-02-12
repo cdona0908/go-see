@@ -17,45 +17,45 @@ var formSubmitHandler = function (event) {
   var movieTitle = inputMovieEl.value.trim();
 
   if (movieTitle) {
-      getMovieInfo(movieTitle);
-      // clear old content
-      inputMovieEl.value = "";
-      descriptionContainer.textContent = "";
+    getMovieInfo(movieTitle);
+    // clear old content
+    inputMovieEl.value = "";
+    descriptionContainer.textContent = "";
   } else {
-      alert("Please enter a valid movie title");
+    alert("Please enter a valid movie title");
   }
-  
+
 };
 
 //Get Movie Information 
-var getMovieInfo = function(title){
+var getMovieInfo = function (title) {
   // format the OMDB api url
-  var apiOmdbUrl = "http://www.omdbapi.com/?apikey=b1ac471e&t=" + title +"&plot=full";
+  var apiOmdbUrl = "http://www.omdbapi.com/?apikey=b1ac471e&t=" + title + "&plot=full";
   //make OMDB api request
   fetch(apiOmdbUrl)
-    .then(function(response) {
+    .then(function (response) {
       // request was successful
       if (response.ok) {
-         console.log(response);
-         response.json().then(function(data) {
+        console.log(response);
+        response.json().then(function (data) {
           console.log(data);
-          displayMovieInfo(data);          
-         });
-        } else {
+          displayMovieInfo(data);
+        });
+      } else {
         alert("Error: " + response.statusText);
-        }
+      }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       alert("Unable to connect to OMDB");
     });
 };
 
 //Display Movie Information Function
 
-var displayMovieInfo = function(info){
-  
+var displayMovieInfo = function (info) {
+
   // check if api returned any movies
-  if (info.length === 0){
+  if (info.length === 0) {
     alert("No movies found with that title");
     return;
   }
@@ -63,7 +63,7 @@ var displayMovieInfo = function(info){
 
   //create h2 element for movie title
   var titleEl = document.createElement("h2");
-  titleEl.setAttribute("id","movie-title");
+  titleEl.setAttribute("id", "movie-title");
   titleEl.textContent = info.Title;
   // append to container
   descriptionContainer.appendChild(titleEl);
@@ -74,22 +74,22 @@ var displayMovieInfo = function(info){
   var basicInfoEl = document.createElement("div");
   //create span element for year
   var yearEl = document.createElement("span");
-  yearEl.setAttribute("id","release-year");
+  yearEl.setAttribute("id", "release-year");
   yearEl.textContent = info.Year;
   basicInfoEl.appendChild(yearEl);
-  
+
   //create span element for runtime
   var runTimeEl = document.createElement("span");
-  runTimeEl.setAttribute("id","runtime");
+  runTimeEl.setAttribute("id", "runtime");
   runTimeEl.textContent = info.Runtime;
   basicInfoEl.appendChild(runTimeEl);
-  
+
   //create span element for genre
   var genreEl = document.createElement("span");
-  genreEl.setAttribute("id","genre");
+  genreEl.setAttribute("id", "genre");
   genreEl.textContent = info.Genre;
   basicInfoEl.appendChild(genreEl);
-  
+
   //append basic info to container
   descriptionContainer.appendChild(basicInfoEl);
 
@@ -98,14 +98,14 @@ var displayMovieInfo = function(info){
   //-------Ratings------
   //create container for rates
   var ratesEl = document.createElement("div");
-  ratesEl.setAttribute("id","rates-container");
-  ratesEl.setAttribute("class","rates-container");
+  ratesEl.setAttribute("id", "rates-container");
+  ratesEl.setAttribute("class", "rates-container");
 
   //create container for IMDB rates
   var imdbEl = document.createElement("div");
   //create IMDB icon element 
-  var imdbIcon = document.createElement("i");  
-  imdbIcon.setAttribute("class","fab fa-imdb");
+  var imdbIcon = document.createElement("i");
+  imdbIcon.setAttribute("class", "fab fa-imdb");
   //create IMDB rate 
   var imdbRate = info.Ratings[0].Value;
   //append icon and rate to IMDB Element
@@ -113,117 +113,117 @@ var displayMovieInfo = function(info){
   //create container for Rotten Tomatoes rates
   var rottenTomatoesEl = document.createElement("div");
   //create Rotten Tomatoes icon element
-  var tomatoIcon = document.createElement("i"); 
+  var tomatoIcon = document.createElement("i");
   // NEED TO FIND ICON FOR TOMATO, try also emoji !!!
   //create Rotten Tomatoes rate
   var tomatoRate = info.Ratings[1].Value;
   //append icon and rate to Rotten Tomatoes Element
   rottenTomatoesEl.append(tomatoIcon, tomatoRate);
-  
+
   //Append Rates to rate container
   ratesEl.append(imdbEl, rottenTomatoesEl);
   //append Rates to description
   descriptionContainer.appendChild(ratesEl);
-  
+
   //-------Save Button------
   var saveToWatchBtn = document.createElement("button");
-  saveToWatchBtn.setAttribute("class","btn");
-  saveToWatchBtn.setAttribute("id","save-movie");
-  saveToWatchBtn.setAttribute("type","submit");
-  saveToWatchBtn.textContent="Save";
-  saveToWatchBtn.onclick=function(){
+  saveToWatchBtn.setAttribute("class", "btn");
+  saveToWatchBtn.setAttribute("id", "save-movie");
+  saveToWatchBtn.setAttribute("type", "submit");
+  saveToWatchBtn.textContent = "Save";
+  saveToWatchBtn.onclick = function () {
     addMovieToFavorite(info)
   }
   descriptionContainer.appendChild(saveToWatchBtn);
-   
+
 
   //-------Plot------
 
   //create movie Info container
   var movieInfoContainer = document.createElement("div");
-  movieInfoContainer.setAttribute("class","movie-info");
+  movieInfoContainer.setAttribute("class", "movie-info");
   //create movie Description Label
   var movieDescriptionEl = document.createElement("h3");
   movieDescriptionEl.textContent = 'Description';
-    
+
   //create plot element
   var moviePlot = document.createElement("p");
-  moviePlot.setAttribute("class","plot");
+  moviePlot.setAttribute("class", "plot");
   moviePlot.textContent = info.Plot;
 
   movieInfoContainer.append(movieDescriptionEl, moviePlot);
 
   //append movie Info to description container
 
-  descriptionContainer.appendChild(movieInfoContainer); 
+  descriptionContainer.appendChild(movieInfoContainer);
 
   //-------Awards------
 
   //create container for awards
   var awardsContainerEl = document.createElement("div");
-  awardsContainerEl.setAttribute("id","awards-container");
-  awardsContainerEl.setAttribute("class","awards-container");
-  
+  awardsContainerEl.setAttribute("id", "awards-container");
+  awardsContainerEl.setAttribute("class", "awards-container");
+
   //create Awards Label
   var awardsLabel = document.createElement("h3");
-  awardsLabel.textContent = 'Awards';  
+  awardsLabel.textContent = 'Awards';
 
   //create icon for Awards
-  var awardsIcon = document.createElement("i");  
-  awardsIcon.setAttribute("class","fas fa-trophy");
-  
+  var awardsIcon = document.createElement("i");
+  awardsIcon.setAttribute("class", "fas fa-trophy");
+
   //create span for Awards
   var awardList = document.createElement("span");
-  awardList.setAttribute("class","awards");
-  awardList.setAttribute("id","awards");
+  awardList.setAttribute("class", "awards");
+  awardList.setAttribute("id", "awards");
   awardList.textContent = info.Awards;
 
-  awardsContainerEl.append( awardsLabel, awardsIcon,awardList);
+  awardsContainerEl.append(awardsLabel, awardsIcon, awardList);
 
   //append awards to description container
 
-  descriptionContainer.appendChild(awardsContainerEl); 
+  descriptionContainer.appendChild(awardsContainerEl);
 
- //-------Cast & Crew------
+  //-------Cast & Crew------
 
- //create container for Cast & Crew
- var crewContainerEl = document.createElement("div");
- crewContainerEl.setAttribute("id","crew-container");
- crewContainerEl.setAttribute("class","crew-container");
- //create Cast & Crew Label
- var crewLabel = document.createElement("h3");
- crewLabel.textContent = 'Cast & Crew';  
+  //create container for Cast & Crew
+  var crewContainerEl = document.createElement("div");
+  crewContainerEl.setAttribute("id", "crew-container");
+  crewContainerEl.setAttribute("class", "crew-container");
+  //create Cast & Crew Label
+  var crewLabel = document.createElement("h3");
+  crewLabel.textContent = 'Cast & Crew';
 
- // Create Director elements
- //Create container for directors
- var directorsContainerEl = document.createElement("div");
- directorsContainerEl.setAttribute("id","directors-container");
- directorsContainerEl.setAttribute("class","directors-container");
- //create Directors Label
- var directorsEl = document.createElement("h4");
- directorsEl.textContent = 'Directors:';
- //create Directors List
- var directorsList = document.createElement("span");  
-  directorsList.setAttribute("id","directors");
+  // Create Director elements
+  //Create container for directors
+  var directorsContainerEl = document.createElement("div");
+  directorsContainerEl.setAttribute("id", "directors-container");
+  directorsContainerEl.setAttribute("class", "directors-container");
+  //create Directors Label
+  var directorsEl = document.createElement("h4");
+  directorsEl.textContent = 'Directors:';
+  //create Directors List
+  var directorsList = document.createElement("span");
+  directorsList.setAttribute("id", "directors");
   directorsList.textContent = info.Director;
 
-  directorsContainerEl.append(directorsEl,directorsList);
+  directorsContainerEl.append(directorsEl, directorsList);
 
- //Create Actors elements
- //Create container for actors
- var actorsContainerEl = document.createElement("div");
- actorsContainerEl.setAttribute("id","actors-container");
- actorsContainerEl.setAttribute("class","actors-container");
- //create Actors Label
- var actorsEl = document.createElement("h4");
- actorsEl.textContent = 'Actors:';
- //create Actors List
- var actorsList = document.createElement("span");  
-  actorsList.setAttribute("id","actors");
+  //Create Actors elements
+  //Create container for actors
+  var actorsContainerEl = document.createElement("div");
+  actorsContainerEl.setAttribute("id", "actors-container");
+  actorsContainerEl.setAttribute("class", "actors-container");
+  //create Actors Label
+  var actorsEl = document.createElement("h4");
+  actorsEl.textContent = 'Actors:';
+  //create Actors List
+  var actorsList = document.createElement("span");
+  actorsList.setAttribute("id", "actors");
   actorsList.textContent = info.Actors;
 
   actorsContainerEl.append(actorsEl, actorsList);
-  
+
   //append actors and directors to cast & crew container
 
   crewContainerEl.append(crewLabel, directorsContainerEl, actorsContainerEl);
@@ -256,36 +256,36 @@ const WATCHURL = 'https://www.youtube.com/watch?v='
 
 var getMovieTrailer = function () {
 
-    // var apiUrl = "http://www.omdbapi.com/?t=movie&y=2021&apikey=b1ac471e"
+  // var apiUrl = "http://www.omdbapi.com/?t=movie&y=2021&apikey=b1ac471e"
 
-    // Gathering our user input and assigning it a name 
-    var userInput = 'MillionDOllarBabyMovie'
+  // Gathering our user input and assigning it a name 
+  var userInput = 'MillionDOllarBabyMovie'
 
-    // Combining our QUERYURL,UserInput, and APIKEY. We also use Youtube's field parameters to refine wthe response we get. 
-    var titleSearch = `${QUERYURL}search?part=snippet&maxResults=10&q=${userInput}Trailer${APIKEY}`
+  // Combining our QUERYURL,UserInput, and APIKEY. We also use Youtube's field parameters to refine wthe response we get. 
+  var titleSearch = `${QUERYURL}search?part=snippet&maxResults=10&q=${userInput}Trailer${APIKEY}`
 
-    // working fetch
-    fetch(titleSearch)
-        .then(function (response) {
-            console.log("response");
-            return response.json();
-        })
-        .then(function (data) {
-            console.log();
-            // We Console log our response data before taking out waht we need. 
-            console.log("Data:",data);
+  // working fetch
+  fetch(titleSearch)
+    .then(function (response) {
+      console.log("response");
+      return response.json();
+    })
+    .then(function (data) {
+      console.log();
+      // We Console log our response data before taking out waht we need. 
+      console.log("Data:", data);
 
-            // take itemes arr from data
-            var itemsArr = data.items;
-        
+      // take itemes arr from data
+      var itemsArr = data.items;
 
-            // itemsarr.forEach((item)=>{ YOUR CODE HERE })
 
-            for (let i = 0; i < itemsArr.length; i++) {
-                const trailerId = itemsArr[i].id.videoId;
-                const Trailerlink = `${WATCHURL}${trailerId}`; 
-            }
-        });
+      // itemsarr.forEach((item)=>{ YOUR CODE HERE })
+
+      for (let i = 0; i < itemsArr.length; i++) {
+        const trailerId = itemsArr[i].id.videoId;
+        const Trailerlink = `${WATCHURL}${trailerId}`;
+      }
+    });
 
 };
 
@@ -308,33 +308,49 @@ var getMovieTrailer = function () {
 
 
 //Event Listeners
-movieFormEl.addEventListener("submit",formSubmitHandler);
+movieFormEl.addEventListener("submit", formSubmitHandler);
 
 
 
 
 
 // movie gets added to movie container
-var addMovieToFavorite = function(movie){
+var addMovieToFavorite = function (movie) {
   // check if movie iss already added to favorites
-  if (favorites.indexOf(movie)>=0)
+  if (favorites.indexOf(movie) >= 0)
     return;
 
-    //adds movie to container
-    favorites.push(movie)
-var favoritesContainer = document.getElementById ("favorites-container");
-var basicInfoEl = document.createElement("div");
+    debugger;
+  // Hide Favorite Title
+  document.getElementById("favoritesTitle").style.display = "none";
 
-// adds onclick to remove from favorites
-basicInfoEl.onclick = function(){
-  basicInfoEl.remove();
-  favorites.pop(movie)
+  //adds movie to container
+  favorites.push(movie)
+  var favoritesContainer = document.getElementById("favorites-container");
+  var divFavoriteMovie = document.createElement("div");
+
+  // Add Movie Poster
+  var poster = document.createElement("img");
+  poster.setAttribute("src", movie.Poster);
+  poster.style.display="block";
+  divFavoriteMovie.appendChild(poster);
+
+  var spRemove = document.createElement("span");
+  spRemove.textContent = "Remove";
+  spRemove.onclick = function () {
+    divFavoriteMovie.remove();
+    favorites.pop(movie)
+
+    // Show Favorite Title again
+    if(favorites.length == 0){
+      document.getElementById("favoritesTitle").style.display = "block";
+    }
+  }
+  divFavoriteMovie.appendChild(spRemove);
+
+
+  favoritesContainer.appendChild(divFavoriteMovie)
 }
-//create span element for year
-var poster = document.createElement("img");
-poster.setAttribute("src",movie.Poster);
-// yearEl.textContent = movie.Title;
-basicInfoEl.appendChild(poster);
-favoritesContainer.appendChild(basicInfoEl)
-}
+
+
 var favorites = []
