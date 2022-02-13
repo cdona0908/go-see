@@ -20,16 +20,16 @@ var formSubmitHandler = function (event) {
   var movieTitle = inputMovieEl.value.trim();
 
   if (movieTitle) {
-      getMovieInfo(movieTitle);
-      
-      getMovieTrailer(movieTitle);
-      // clear old content
-      inputMovieEl.value = "";
-      descriptionContainer.textContent = "";
+    getMovieInfo(movieTitle);
+
+    getMovieTrailer(movieTitle);
+    // clear old content
+    inputMovieEl.value = "";
+    descriptionContainer.textContent = "";
   } else {
-      alert("Please enter a valid movie title");
+    alert("Please enter a valid movie title");
   }
-  
+
 };
 
 
@@ -59,19 +59,19 @@ var getMovieInfo = function(title){
 
 //Display Movie Information Function
 
-var displayMovieInfo = function(info){
-  
+var displayMovieInfo = function (info) {
+
   // check if api returned any movies
-  if (info.length === 0){
+  if (info.length === 0) {
     alert("No movies found with that title");
     return;
   }
-    
+
   //-----movie Title----
 
   //create h2 element for movie title
   var titleEl = document.createElement("h2");
-  titleEl.setAttribute("id","movie-title");
+  titleEl.setAttribute("id", "movie-title");
   titleEl.textContent = info.Title;
   // append to container
   descriptionContainer.appendChild(titleEl);
@@ -135,103 +135,104 @@ var displayMovieInfo = function(info){
   ratesEl.append(imdbEl, rottenTomatoesEl);
   //append Rates to description
   descriptionContainer.appendChild(ratesEl);
-  
+
   //-------Save Button------
   var saveToWatchBtn = document.createElement("button");
-  saveToWatchBtn.setAttribute("class","btn");
-  saveToWatchBtn.setAttribute("id","save-movie");
-  saveToWatchBtn.setAttribute("type","submit");
+  saveToWatchBtn.setAttribute("class", "btn");
+  saveToWatchBtn.setAttribute("id", "save-movie");
+  saveToWatchBtn.setAttribute("type", "submit");
+  saveToWatchBtn.onclick = function () { addMovieToFavorite(info); }
   saveToWatchBtn.textContent = "Add to Favorites";
-  
-  descriptionContainer.appendChild(saveToWatchBtn);  
+
+  descriptionContainer.appendChild(saveToWatchBtn);
 
   //-------Plot------
 
   //create movie Info container
   var movieInfoContainer = document.createElement("div");
-  movieInfoContainer.setAttribute("class","movie-info");
+  movieInfoContainer.setAttribute("class", "movie-info");
   //create movie Description Label
   var movieDescriptionEl = document.createElement("h3");
   movieDescriptionEl.textContent = 'Description';
-    
+
   //create plot element
   var moviePlot = document.createElement("p");
-  moviePlot.setAttribute("class","plot");
+  moviePlot.setAttribute("class", "plot");
   moviePlot.textContent = info.Plot;
 
   movieInfoContainer.append(movieDescriptionEl, moviePlot);
 
   //append movie Info to description container
 
-  descriptionContainer.appendChild(movieInfoContainer); 
+  descriptionContainer.appendChild(movieInfoContainer);
 
   //-------Awards------
 
   //create container for awards
   var awardsContainerEl = document.createElement("div");
-  awardsContainerEl.setAttribute("id","awards-container");
-  awardsContainerEl.setAttribute("class","awards-container");
-  
+  awardsContainerEl.setAttribute("id", "awards-container");
+  awardsContainerEl.setAttribute("class", "awards-container");
+
   //create Awards Label
   var awardsLabel = document.createElement("h3");
-  awardsLabel.textContent = 'Awards';  
+  awardsLabel.textContent = 'Awards';
 
   //create icon for Awards
-  var awardsIcon = document.createElement("i");  
-  awardsIcon.setAttribute("class","fas fa-trophy");
-  
+  var awardsIcon = document.createElement("i");
+  awardsIcon.setAttribute("class", "fas fa-trophy");
+
   //create span for Awards
   var awardList = document.createElement("span");
-  awardList.setAttribute("class","awards");
-  awardList.setAttribute("id","awards");
+  awardList.setAttribute("class", "awards");
+  awardList.setAttribute("id", "awards");
   awardList.textContent = info.Awards;
 
-  awardsContainerEl.append( awardsLabel, awardsIcon,awardList);
+  awardsContainerEl.append(awardsLabel, awardsIcon, awardList);
 
   //append awards to description container
 
-  descriptionContainer.appendChild(awardsContainerEl); 
+  descriptionContainer.appendChild(awardsContainerEl);
 
- //-------Cast & Crew------
+  //-------Cast & Crew------
 
- //create container for Cast & Crew
- var crewContainerEl = document.createElement("div");
- crewContainerEl.setAttribute("id","crew-container");
- crewContainerEl.setAttribute("class","crew-container");
- //create Cast & Crew Label
- var crewLabel = document.createElement("h3");
- crewLabel.textContent = 'Cast & Crew';  
+  //create container for Cast & Crew
+  var crewContainerEl = document.createElement("div");
+  crewContainerEl.setAttribute("id", "crew-container");
+  crewContainerEl.setAttribute("class", "crew-container");
+  //create Cast & Crew Label
+  var crewLabel = document.createElement("h3");
+  crewLabel.textContent = 'Cast & Crew';
 
- // Create Director elements
- //Create container for directors
- var directorsContainerEl = document.createElement("div");
- directorsContainerEl.setAttribute("id","directors-container");
- directorsContainerEl.setAttribute("class","directors-container");
- //create Directors Label
- var directorsEl = document.createElement("h4");
- directorsEl.textContent = 'Directors:';
- //create Directors List
- var directorsList = document.createElement("span");  
-  directorsList.setAttribute("id","directors");
+  // Create Director elements
+  //Create container for directors
+  var directorsContainerEl = document.createElement("div");
+  directorsContainerEl.setAttribute("id", "directors-container");
+  directorsContainerEl.setAttribute("class", "directors-container");
+  //create Directors Label
+  var directorsEl = document.createElement("h4");
+  directorsEl.textContent = 'Directors:';
+  //create Directors List
+  var directorsList = document.createElement("span");
+  directorsList.setAttribute("id", "directors");
   directorsList.textContent = info.Director;
 
-  directorsContainerEl.append(directorsEl,directorsList);
+  directorsContainerEl.append(directorsEl, directorsList);
 
- //Create Actors elements
- //Create container for actors
- var actorsContainerEl = document.createElement("div");
- actorsContainerEl.setAttribute("id","actors-container");
- actorsContainerEl.setAttribute("class","actors-container");
- //create Actors Label
- var actorsEl = document.createElement("h4");
- actorsEl.textContent = 'Actors:';
- //create Actors List
- var actorsList = document.createElement("span");  
-  actorsList.setAttribute("id","actors");
+  //Create Actors elements
+  //Create container for actors
+  var actorsContainerEl = document.createElement("div");
+  actorsContainerEl.setAttribute("id", "actors-container");
+  actorsContainerEl.setAttribute("class", "actors-container");
+  //create Actors Label
+  var actorsEl = document.createElement("h4");
+  actorsEl.textContent = 'Actors:';
+  //create Actors List
+  var actorsList = document.createElement("span");
+  actorsList.setAttribute("id", "actors");
   actorsList.textContent = info.Actors;
 
   actorsContainerEl.append(actorsEl, actorsList);
-  
+
   //append actors and directors to cast & crew container
 
   crewContainerEl.append(crewLabel, directorsContainerEl, actorsContainerEl);
@@ -242,14 +243,14 @@ var displayMovieInfo = function(info){
 
 };
 
-var displayMovieLink = function(trailerLink) {
-  if(!trailerLink){
+var displayMovieLink = function (trailerLink) {
+  if (!trailerLink) {
     return 'Failed To Load Trailer Link';
-  }; 
+  };
   var trailerLinkEl = document.createElement('a');
   trailerLinkEl.setAttribute('id', 'trailerLink');
-  trailerLinkEl.setAttribute('href',trailerLink);
-  trailerLinkEl.textContent = trailerLink; 
+  trailerLinkEl.setAttribute('href', trailerLink);
+  trailerLinkEl.textContent = trailerLink;
   descriptionContainer.appendChild(trailerLinkEl);
 }
 
@@ -328,7 +329,43 @@ movieFormEl.addEventListener("submit", formSubmitHandler);
 
 
 // When I want to save the movie for later, a list is created via localStorage with title and a link to the trailer
+// movie gets added to movie container
+var addMovieToFavorite = function (movie) {
+  // check if movie iss already added to favorites
+  if (favorites.indexOf(movie) >= 0)
+    return;
 
+  document.getElementById("favoritesTitle").style.display = "none";
+
+  //adds movie to container
+  favorites.push(movie)
+  var favoritesContainer = document.getElementById("favorites-container");
+  var divFavoriteMovie = document.createElement("div");
+
+  // Add poster to favorites section
+  var poster = document.createElement("img");
+  poster.setAttribute("src", movie.Poster);
+  poster.setAttribute("style","display:block");
+  divFavoriteMovie.appendChild(poster);
+  // Add remove button
+  var btnRemove = document.createElement("btn");
+  btnRemove.setAttribute("class", "btn-remove-favorite");
+  btnRemove.textContent = "Remove";
+  // adds onclick to remove from favorites
+  btnRemove.onclick = function () {
+    divFavoriteMovie.remove();
+    favorites.pop(movie);
+
+    // Show Favorite Title if no movies are in favorites
+    if (favorites.length == 0) {
+      document.getElementById("favoritesTitle").style.display = "block";
+    }
+  }
+  divFavoriteMovie.appendChild(btnRemove);
+
+  favoritesContainer.appendChild(divFavoriteMovie)
+}
+var favorites = []
 
 
 
