@@ -34,25 +34,25 @@ var formSubmitHandler = function (event) {
 
 
 //Get Movie Information 
-var getMovieInfo = function (title) {
-
+var getMovieInfo = function(title){
+  
   // format the OMDB api url
-  var apiOmdbUrl = "https://www.omdbapi.com/?apikey=b1ac471e&t=" + title + "&plot=full";
+  var apiOmdbUrl = "https://www.omdbapi.com/?apikey=b1ac471e&t=" + title +"&plot=full";
   //make OMDB api request
   fetch(apiOmdbUrl)
-    .then(function (response) {
+    .then(function(response) {
       // request was successful
       if (response.ok) {
-        console.log(response);
-        response.json().then(function (data) {
+         console.log(response);
+         response.json().then(function(data) {
           console.log(data);
-          displayMovieInfo(data);
-        });
-      } else {
+          displayMovieInfo(data);          
+         });
+        } else {
         alert("Error: " + response.statusText);
-      }
+        }
     })
-    .catch(function (error) {
+    .catch(function(error) {
       alert("Unable to connect to OMDB");
     });
 };
@@ -82,41 +82,41 @@ var displayMovieInfo = function (info) {
   var basicInfoEl = document.createElement("div");
   //create span element for year
   var yearEl = document.createElement("span");
-  yearEl.setAttribute("id", "release-year");
+  yearEl.setAttribute("id","release-year");
   yearEl.textContent = info.Year;
   basicInfoEl.appendChild(yearEl);
-
+  
   //create span element for runtime
   var runTimeEl = document.createElement("span");
-  runTimeEl.setAttribute("id", "runtime");
+  runTimeEl.setAttribute("id","runtime");
   runTimeEl.textContent = info.Runtime;
   basicInfoEl.appendChild(runTimeEl);
-
+  
   //create span element for genre
   var genreEl = document.createElement("span");
-  genreEl.setAttribute("id", "genre");
+  genreEl.setAttribute("id","genre");
   genreEl.textContent = info.Genre;
   basicInfoEl.appendChild(genreEl);
-
+  
   //append basic info to container
   descriptionContainer.appendChild(basicInfoEl);
-
+  
 
   //-----Movie Trailer-----Add containers and call trailer function here
 
-
+ 
 
   //-------Ratings------
   //create container for rates
   var ratesEl = document.createElement("div");
-  ratesEl.setAttribute("id", "rates-container");
-  ratesEl.setAttribute("class", "rates-container");
+  ratesEl.setAttribute("id","rates-container");
+  ratesEl.setAttribute("class","rates-container");
 
   //create container for IMDB rates
   var imdbEl = document.createElement("div");
   //create IMDB icon element 
-  var imdbIcon = document.createElement("i");
-  imdbIcon.setAttribute("class", "fab fa-imdb");
+  var imdbIcon = document.createElement("i");  
+  imdbIcon.setAttribute("class","fab fa-imdb");
   //create IMDB rate 
   var imdbRate = info.Ratings[0].Value;
   //append icon and rate to IMDB Element
@@ -124,13 +124,13 @@ var displayMovieInfo = function (info) {
   //create container for Rotten Tomatoes rates
   var rottenTomatoesEl = document.createElement("div");
   //create Rotten Tomatoes icon element
-  var tomatoIcon = document.createElement("i");
+  var tomatoIcon = document.createElement("i"); 
   // NEED TO FIND ICON FOR TOMATO, try also emoji !!!
   //create Rotten Tomatoes rate
   var tomatoRate = info.Ratings[1].Value;
   //append icon and rate to Rotten Tomatoes Element
   rottenTomatoesEl.append(tomatoIcon, tomatoRate);
-
+  
   //Append Rates to rate container
   ratesEl.append(imdbEl, rottenTomatoesEl);
   //append Rates to description
@@ -265,53 +265,51 @@ const WATCHURL = 'https://www.youtube.com/watch?v='
 
 var getMovieTrailer = function (movieName) {
 
-  // Gathering our user input and assigning it a name 
+    // Gathering our user input and assigning it a name 
+  
 
+    // Combining our QUERYURL,UserInput, and APIKEY. We also use Youtube's field parameters to refine wthe response we get. 
+    var titleSearch = `${QUERYURL}search?part=snippet&maxResults=1&channelId=UCi8e0iOVk1fEOogdfu4YgfA&q=${movieName}${YTAPIKEY}`;
+    
+    
 
-  // Combining our QUERYURL,UserInput, and APIKEY. We also use Youtube's field parameters to refine wthe response we get. 
-  var titleSearch = `${QUERYURL}search?part=snippet&maxResults=1&channelId=UCi8e0iOVk1fEOogdfu4YgfA&q=${movieName}${YTAPIKEY}`;
-
-
-
-  fetch(titleSearch)
-    .then(function (response) {
-      console.log(response);
-      return response.json();
-    })
-    .then(function (data) {
-      // take itemes arr from data
-      console.log(data);
-      var itemsArr = data.items;
-      // itemsarr.forEach((item)=>{ YOUR CODE HERE })
-      const trailerId = itemsArr[0].id.videoId;
-      console.log(trailerId);
-      displayMovieTrailer(trailerId);
-
-      //const trailerLink = `${WATCHURL}${trailerId}`;             
-      //displayMovieLink(trailerLink)
-    }).catch((err) => {
-      console.error(err)
-    });
-
+    fetch(titleSearch)
+        .then(function (response) {
+            console.log(response);
+            return response.json();
+        })
+        .then(function (data) {
+            // take itemes arr from data
+            console.log(data);
+            var itemsArr = data.items;
+            // itemsarr.forEach((item)=>{ YOUR CODE HERE })
+            const trailerId = itemsArr[0].id.videoId;
+            console.log(trailerId);
+            displayMovieTrailer(trailerId);
+                        
+            //const trailerLink = `${WATCHURL}${trailerId}`;             
+            //displayMovieLink(trailerLink)
+        }).catch((err)=>{
+          console.error(err)
+        });
+    
 };
 
-var displayMovieTrailer = function (movieId) {
+var displayMovieTrailer = function(movieId){
   var trailerContainerEl = document.createElement("div");
-  trailerContainerEl.setAttribute("class", "video-container");
-  var trailerTitleEl = document.createElement("h3");
-  trailerTitleEl.textContent = 'Trailer';
+  trailerContainerEl.setAttribute("class","video-container");
   // create variable to hold yhe videoId  
   var returnedVideoId = movieId;
   //create iframe for trailer 
   var trailerVideoEl = document.createElement("iframe");
-  trailerVideoEl.setAttribute("id", "player");
-  trailerVideoEl.setAttribute("type", "text/html");
-  trailerVideoEl.setAttribute("width", "640");
-  trailerVideoEl.setAttribute("height", "390");
-  trailerVideoEl.setAttribute("src", "https://www.youtube.com/embed/" + returnedVideoId + "?enablejsapi=1");
-  trailerVideoEl.setAttribute("frameborder", "0");
+  trailerVideoEl.setAttribute("id","player");
+  trailerVideoEl.setAttribute("type","text/html");
+  trailerVideoEl.setAttribute("width","640");
+  trailerVideoEl.setAttribute("height","390");
+  trailerVideoEl.setAttribute("src","https://www.youtube.com/embed/" + returnedVideoId + "?enablejsapi=1");
+  trailerVideoEl.setAttribute("frameborder","0");
   //append trailer video to trailer container
-  trailerContainerEl.append(trailerTitleEl, trailerVideoEl);
+  trailerContainerEl.appendChild(trailerVideoEl);
   //append trailer container to description container
   descriptionContainer.appendChild(trailerContainerEl);
 };
